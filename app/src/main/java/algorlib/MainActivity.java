@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.lzzy.algorithm.R;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Integer[] items;
     private EditText edtItems;
     private TextView tvResult;
+    private Object swap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sort.sort();
                 String result = sort.getResult();
                 tvResult.setText(result);
+                Toast.makeText(this,"总共时长"+sort.getDuration(),Toast.LENGTH_SHORT).show();
                 //insertSort();
                 //displayItems(tvResult);
                 break;
@@ -65,7 +68,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //用一个变量j指向i后一个位置，也就是1(j同i一样，仅仅是指向数组的第二个位置，所以j得值为1，但是a[j]=1)
         //然后1,与9比较，9大，所以把j的值赋给min,j++
         //然后j++重复步骤3，直到最后可以得到min=9，所以交换i和j的值然后i+++++12
+
+        for (int i=0;i<items.length-1;i++){
+            int minPos=i;
+            for (int j=i+1;j<items.length;j++){
+                if (items[minPos].compareTo(items[j])>0){
+                    minPos=j;
+                }
+            }
+            swap(minPos,i);
+        }
     }
+
+    private void swap(int m, int n) {
+        int tmp=items[m];
+        items[m]=items[n];
+        items[n]=tmp;
+    }
+
 
     private void generateItems() {
         items = new Integer[10];

@@ -53,9 +53,11 @@ public class DirectSort {
         for (int i = 0; i < items.length - 1; i++) {
             int minPos = i;
             for (int j = i + 1; j < items.length; j++) {
-                minPos = j;
+                if (bigger(items[minPos],i)) {
+                    minPos = j;
+                }
             }
-            swap(moveSetep, i);
+            swap(minPos, i);
         }
         duration=System.currentTimeMillis()-start;
 
