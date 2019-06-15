@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="16dp"
-    tools:context=".MainActivity">
+    tools:context="algorlib.MainActivity">
 
     <TextView
         android:id="@+id/activity_main_tv_result"

@@ -1,10 +1,12 @@
-package net.lzzy.algorithm;
+package algorlib;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import net.lzzy.algorithm.R;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -35,8 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 displayItems(edtItems);
                 break;
             case R.id.activity_main_btn_sort:
-                directSort();
-                displayItems(tvResult);
+               // directSort();
+                DirectSort sort=new DirectSort(items);
+                sort.sort();
+                String result = sort.getResult();
+                tvResult.setText(result);
+                //insertSort();
+                //displayItems(tvResult);
                 break;
             default:
                 break;
