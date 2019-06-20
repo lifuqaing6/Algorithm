@@ -23,7 +23,7 @@ public class SortFactory {
            return sort;
      }
      public static String[]getsortNames(){
-        return new String[]{"直接排序","直接插入排序","希尔排序"};
+        return new String[]{"直接排序","直接插入排序","希尔排序0"};
      }
 
 
