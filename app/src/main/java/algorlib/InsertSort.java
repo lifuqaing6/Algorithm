@@ -4,10 +4,12 @@ package algorlib;
  * Created by lzzy_gxy on 2019/6/15.
  * Description:
  */
-public abstract class InsertSort<T extends Comparable<? super T > >extends BaseSort<T>{
-    InsertSort(T[] itms) {
+public class InsertSort<T extends Comparable<? super T > >extends BaseSort<T>{
+ public    InsertSort(T[] itms) {
         super(itms);
     }
+
+
     @Override
     public void sort(){
         long start=System.currentTimeMillis();
@@ -25,11 +27,6 @@ public abstract class InsertSort<T extends Comparable<? super T > >extends BaseS
                     items[j+1]=tmp;
                 }
                 duration=System.currentTimeMillis()-start;
-    }
-
-    protected abstract boolean bigger(T item, T item1);{
-
-
     }
 
 }

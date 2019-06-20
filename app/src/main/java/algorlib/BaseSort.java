@@ -1,5 +1,6 @@
 package algorlib;
 
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -12,18 +13,21 @@ public abstract class BaseSort<T extends Comparable<? super T>> {
 
     T[] items;
      long duration;
-    private int compaereCount;
-    private int swapCount;
+     int compaereCount;
+     int compareMove;
+     int swapCount;
      int moveSetep;
+     int compareSwop;
+     long directSort;
 
 
-     BaseSort(T[] itms) {
+   public   BaseSort(T[] itms) {
         this.items = itms;
         compaereCount = 0;
         swapCount = 0;
         moveSetep = 0;
     }
-    boolean bigger(Integer a, Integer b) {
+    boolean bigger (T a, T b) {
         compaereCount++;
         return a.compareTo(b) > 0;
     }
@@ -32,6 +36,10 @@ public abstract class BaseSort<T extends Comparable<? super T>> {
        items[i] = items[j];
         items[j] = tmp;
         swapCount++;
+    }
+    boolean comare(T a,T b){
+         compaereCount++;
+         return a.compareTo(b)>0;
     }
 
         public String getResult() {
@@ -45,6 +53,8 @@ public abstract class BaseSort<T extends Comparable<? super T>> {
     public void sortWithTime(){
          long start= System.currentTimeMillis();
          sort();
+         long endTime=System.currentTimeMillis();
+         //time=endTime-startTime;
          duration=System.currentTimeMillis()-start;
     }
 

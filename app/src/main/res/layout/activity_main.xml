@@ -20,10 +20,17 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="@string/activity_main_edt_items_hint"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/xz"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/activity_main_btn_generate"
             android:layout_width="0dp"

@@ -2,14 +2,19 @@ package algorlib;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AndroidException;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import net.lzzy.algorithm.R;
 
+import java.security.PrivateKey;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -19,12 +24,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Integer[] items;
     private EditText edtItems;
     private TextView tvResult;
+    private Spinner spinner;
     private Object swap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initViews();
+        initSpinner();
+    }
+
+    private void initSpinner() {
+        Spinner spinner=findViewById(R.id.xz);
+
+
+       // String[] names={"选择排序","直接插入排序","希尔排序"};
+       spinner.setAdapter(new ArrayAdapter<String>(this,
+               android.R.layout.simple_spinner_dropdown_item,SortFactory.getsortNames()));
+    }
+
+
+    private void initViews() {
         edtItems = findViewById(R.id.activity_main_edt_items);
         findViewById(R.id.activity_main_btn_generate).setOnClickListener(this);
         findViewById(R.id.activity_main_btn_sort).setOnClickListener(this);
@@ -39,14 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 displayItems(edtItems);
                 break;
             case R.id.activity_main_btn_sort:
-               // directSort();
-                DirectSort sort=new DirectSort(items);
-                sort.sort();
+                BaseSort<Integer> sort=SortFactory.getInstance(spinner.getSelectedItemPosition(),items);
+               BaseSort<Integer> sortNotNull= Objects.requireNonNull(sort);
+               sortNotNull.sortWithTime();
                 String result = sort.getResult();
                 tvResult.setText(result);
-                Toast.makeText(this,"总共时长"+sort.getDuration(),Toast.LENGTH_SHORT).show();
-                //insertSort();
-                //displayItems(tvResult);
+                Toast.makeText(this,"总共时长:"+sort.getDuration(),Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
