@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Created by lzzy_gxy on 2019/6/15.
- * Description:
+ * Description:类型参数T需要加约束，约束T实现Comparabe<T>接口
  */
 public abstract class BaseSort<T extends Comparable<? super T>> {
 

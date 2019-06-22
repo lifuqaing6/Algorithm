@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.AndroidException;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText edtItems;
     private TextView tvResult;
     private Spinner spinner;
+    private LinearLayout container;
+    private Spinner spSearch;
+    private Button  btnSort;
     private Object swap;
 
     @Override
@@ -33,12 +38,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initViews();
         initSpinner();
+        initSearch();
     }
+
+    private void initSearch() {
+        Spinner spSearch=findViewById(R.id.activity_main_sp_search);
+        spSearch.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,SearchFactory.getSeerchNames()));
+        LinearLayout container=findViewById(R.id.activity_main_btn_container);
+        findViewById(R.id.activity_main_sp_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetSearch();
+            }
+        });
+    }
+
+    private void resetSearch() {
+    }
+
 
     private void initSpinner() {
         Spinner spinner=findViewById(R.id.xz);
-
-
        // String[] names={"选择排序","直接插入排序","希尔排序"};
        spinner.setAdapter(new ArrayAdapter<String>(this,
                android.R.layout.simple_spinner_dropdown_item,SortFactory.getsortNames()));
@@ -130,6 +151,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 items[j+1]=tmp;
             }
         }
+        private View.OnClickListener listener=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BaseSearch<Integer>search=
+                        SearchFactory.getInstance(spSearch.getSelectedItemPosition(),items);
+                if (search !=null){
+                    int pos=search.search(v.getId());
+                    tvResult.setText("该元素位于数组第".concat((pos + 1)+"位"));
+                }
+            }
+        };
 
 
     }
