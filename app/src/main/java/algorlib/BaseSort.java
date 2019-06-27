@@ -31,12 +31,13 @@ public abstract class BaseSort<T extends Comparable<? super T>> {
         compaereCount++;
         return a.compareTo(b) > 0;
     }
-    private void sawp(int  i,int j) {
-        T tmp = items[i];
-       items[i] = items[j];
-        items[j] = tmp;
-        swapCount++;
-    }
+//    private void swap(int  i,int j) {
+//        T tmp = items[i];
+//        items[i] = items[j];
+//        items[j] = tmp;
+//        swapCount++;
+//    }
+
     boolean comare(T a,T b){
          compaereCount++;
          return a.compareTo(b)>0;
@@ -57,6 +58,7 @@ public abstract class BaseSort<T extends Comparable<? super T>> {
          //time=endTime-startTime;
          duration=System.currentTimeMillis()-start;
     }
+
 
     public abstract void sort();
 

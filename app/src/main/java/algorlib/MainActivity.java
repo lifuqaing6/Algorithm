@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AndroidException;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import net.lzzy.algorithm.R;
 
 import java.security.PrivateKey;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
@@ -42,19 +44,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initSearch() {
-        Spinner spSearch=findViewById(R.id.activity_main_sp_search);
+        final Spinner spSearch=findViewById(R.id.activity_main_sp_search);
         spSearch.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,SearchFactory.getSeerchNames()));
         LinearLayout container=findViewById(R.id.activity_main_btn_container);
         findViewById(R.id.activity_main_sp_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //BaseSearch<Integer> search=SearchFactory.getInstance(spSearch.)
+                
                 resetSearch();
             }
         });
     }
 
     private void resetSearch() {
+        container.removeAllViews();
+        generateItems();
+        btnSort.callOnClick();
+        for (Integer i :items){
+            Button btn=new Button(this);
+            btn.setText(String.format(i.toString(), Locale.CANADA));
+            btn.setId(i);
+            btn.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,1));
+            btn.setOnClickListener(listener);
+            container.addView(btn);
+        }
     }
 
 

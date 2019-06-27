@@ -4,7 +4,7 @@ package algorlib;
  * Created by lzzy_gxy on 2019/6/22.
  * Description:
  */
-public class BaseSearch <T extends Comparable<? super T>> {
+public abstract class BaseSearch <T extends Comparable<? super T>> {
 
 
     T[] items;
@@ -14,13 +14,19 @@ public class BaseSearch <T extends Comparable<? super T>> {
     int moveSetep;
 
 
+
+
     BaseSearch(T[] items) {
         this.items = items;
         compaereCount = 0;
         swapCount = 0;
         moveSetep = 0;
     }
-boolean equal(T a ,T b) {
+
+    public BaseSearch() {
+    }
+
+    boolean equal(T a ,T b) {
      compaereCount++;
      return  a.compareTo(b)==0;
 }
@@ -48,6 +54,8 @@ boolean equal(T a ,T b) {
     public int getSwapCount(){
         return  swapCount;
     }
+
+    abstract void sort();
 }
 
 //public void  searchWithTime(T key){
