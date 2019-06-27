@@ -4,7 +4,7 @@ package algorlib;
  * Created by lzzy_gxy on 2019/6/22.
  * Description:
  */
-public class DirectSearch <T extends Comparable<? super T>> extends BaseSearch<T> {
+public abstract class DirectSearch <T extends Comparable<? super T>> extends BaseSearch<T> {
     DirectSearch(T[] items) {
         super(items);
 
